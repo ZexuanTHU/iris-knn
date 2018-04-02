@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # KNN (K Nearest Neighbors) Alforithm
 # pros:
@@ -104,3 +105,9 @@ for k in range(140):
 
 for (i, each_acc) in enumerate(accuracy, 0):
     print('k: {}'.format(i + 1), 'Accuracy: {}'.format(each_acc))
+plt.figure()
+plt.plot(np.arange(0, 140, 1), accuracy)
+plt.title('k - Accuracy')
+plt.xlabel('k')
+plt.ylabel('Accuracy')
+plt.show()
