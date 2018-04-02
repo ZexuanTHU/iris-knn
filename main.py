@@ -1,14 +1,24 @@
 import numpy as np
 import pandas as pd
 
+# KNN (K Nearest Neighbors) Alforithm
+# pros:
+# 1. High accuracy (with balanced dataset)
+# 2. Easy to understand
+# cons:
+# 1. Time complexity O(n)
+# 2. Consume huge memory cache
+# 3. Can NOT handle with unbalanced dataset
 
 class KNN():
-    '''KNN algorithm'''
+    '''
+    KNN algorithm
+    '''
 
     def __init__(self, k):
         '''
         Args:
-            k (int): The nearest k instances
+            k(int): The nearest k instances
         '''
         self.k = k
 
@@ -16,8 +26,8 @@ class KNN():
         '''
         Load training dataset
         Args:
-            train_path (string): File path of training dataset
-            label_name (string): Label name of the given dataset
+            train_path(string): File path of training dataset
+            label_name(string): Label name of the given dataset
         '''
         train_csv = pd.read_csv(
             train_path, header=-1, names=CSV_COLUMN_NAMES).sample(frac=1).reset_index(drop=True)
@@ -33,8 +43,8 @@ class KNN():
         '''
         Load testing dataset
         Args:
-            test_path (string): File path of testing dataset
-            label_name (string): Label name of the given name
+            test_path(string): File path of testing dataset
+            label_name(string): Label name of the given name
         '''
         test_csv = pd.read_csv(
             test_path, header=-1, names=CSV_COLUMN_NAMES).sample(frac=1).reset_index(drop=True)
@@ -50,7 +60,7 @@ class KNN():
         '''
         Predict the label of each testing
         Args:
-            test_f (<numpy.ndarray>): Features dataframe of testing dataset
+            test_f ( < numpy.ndarray > ): Features dataframe of testing dataset
         '''
         feat_dist = []
         # Calculate the feature distances of given data points `test_f`
@@ -73,6 +83,7 @@ SPECIES = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
 
 # Initialization
 accuracy = []
+# K: from 1 to len(train_fs)
 for k in range(140):
     knn = KNN(k=k + 1)
     # Load data
@@ -90,5 +101,6 @@ for k in range(140):
             correct += 1
         print('Predict: {}'.format(mode), 'TEST_LABEL: {}'.format(test_ls[i]),)
     accuracy.append(correct / len(test_fs))
+
 for (i, each_acc) in enumerate(accuracy, 0):
     print('k: {}'.format(i + 1), 'Accuracy: {}'.format(each_acc))
